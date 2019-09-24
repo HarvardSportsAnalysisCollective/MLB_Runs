@@ -11,5 +11,14 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 
 mlb <- read_csv("mlb_elo.csv")
+
+```
+
+```{r}
+win_loss<-mlb%>%
+  filter(season >= 1995)%>%
+  gather(team1, team2, key = home, value = team)%>% 
+  filter(season == 2019, team == "ANA")%>%
+  
 ```
 
