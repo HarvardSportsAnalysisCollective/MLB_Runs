@@ -8,13 +8,9 @@ library(tidyverse)
 
 mlb <- read_csv("mlb_elo.csv")
 
-mlb2019 <- mlb[(mlb$date > '2019-03-25') $ (mlb$team1),]
+mets2015 <- mlb[(mlb$team == 'NYM' & mlb$season =='2015'),]
 
-mlb2019['date']
-
-length(mlb2019['date'][1,])
-
-mlb2019['date'][1]
+head(mets2015)
 
 # Take the last ten games of each year
 # Calculate run differential for playoff teams in those ten games
