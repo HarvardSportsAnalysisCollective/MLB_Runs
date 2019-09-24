@@ -11,5 +11,20 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 
 mlb <- read_csv("mlb_elo.csv")
+
+teams <- as_tibble(unique(mlb$team1))
+
+win_loss <- function(x) {
+  team <- names(x)
+  if (team == team1) {
+    mutate(win = 1)
+  } else {
+    mutate(win = 0)
+  }
+}
+
+for (team in teams){
+  filter(mlb$team1 == team)
+}
 ```
 
