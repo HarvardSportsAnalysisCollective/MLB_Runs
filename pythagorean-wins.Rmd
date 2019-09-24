@@ -5,6 +5,15 @@ date: "9/22/2019"
 output: html_document
 ---
 
+
+```{python}
+import pandas as pd
+```
+
+```{python}
+mlb = pd.read_csv('mlb_elo.csv')
+```
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 

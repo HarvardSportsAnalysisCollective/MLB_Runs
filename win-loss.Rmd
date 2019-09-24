@@ -12,6 +12,7 @@ library(tidyverse)
 
 mlb <- read_csv("mlb_elo.csv")
 
+<<<<<<< HEAD
 ```
 
 ```{r}
@@ -20,5 +21,21 @@ win_loss<-mlb%>%
   gather(team1, team2, key = home, value = team)%>% 
   filter(season == 2019, team == "ANA")%>%
   
+=======
+teams <- as_tibble(unique(mlb$team1))
+
+win_loss <- function(x) {
+  team <- names(x)
+  if (team == team1) {
+    mutate(win = 1)
+  } else {
+    mutate(win = 0)
+  }
+}
+
+for (team in teams){
+  filter(mlb$team1 == team)
+}
+>>>>>>> 0da0bbac09ca78134cef9a645598ba19b718e568
 ```
 
