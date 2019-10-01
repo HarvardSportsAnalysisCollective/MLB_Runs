@@ -18,8 +18,5 @@ mlb <- read_csv("mlb_elo.csv") %>%
   mutate(playoff = case_when(game_number > 162 ~ 1,
                              TRUE ~ 0))
 
-mlb
-
 write_csv(mlb, "mlb_elo.csv")
 ```
-
