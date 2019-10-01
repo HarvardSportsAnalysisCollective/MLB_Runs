@@ -11,7 +11,10 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 
 mlb <- read_csv("mlb_elo.csv") %>% 
-  filter(season>1994)
+  filter(season>1994)%>%
+  arrange(season, date)%>%
+  group_by(season, team)%>%
+  mutate(game_number = row_number())
 
 write_csv(mlb, "mlb_elo.csv")
 ```
