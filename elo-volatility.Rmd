@@ -10,6 +10,15 @@ knitr::opts_chunk$set(echo = TRUE)
 
 library(tidyverse)
 
+# Reads in MLB game results
 mlb <- read_csv("mlb_elo.csv")
+
+# Filters by season and played games and arranges by team
+mlb <- mlb %>% filter(season > 1994, !is.na(score1)) %>% arrange(team, season, desc(game_number)) %>%
+  mutate(elo_pre = ifelse(home == "team1", elo1_pre, elo2_pre), 
+         elo_post = ifelse(home == "team1", elo1_post, elo2_post),
+         diff = elo_pre - elo_post)
+
+test <- mlb %>% filter(season == 2019, team == "ANA")
 ```
 
