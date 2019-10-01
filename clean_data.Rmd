@@ -12,9 +12,13 @@ library(tidyverse)
 
 mlb <- read_csv("mlb_elo.csv") %>% 
   filter(season>1994)%>%
-  arrange(season, date)%>%
-  group_by(season, team)%>%
-  mutate(game_number = row_number())
+  #arrange(season, date)%>%
+  #group_by(season, team)%>%
+  #mutate(game_number = row_number()) %>% 
+  mutate(playoff = case_when(game_number > 162 ~ 1,
+                             TRUE ~ 0))
+
+mlb
 
 write_csv(mlb, "mlb_elo.csv")
 ```
