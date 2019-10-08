@@ -28,6 +28,18 @@ mlb%>%
 
 
 ```{r}
+for(i in 1:length(mlb$game_number)){
+  if(mlb$game_number[i] > 162){
+    mlb$playoff[i] <- 1
+  }
+  else{mlb$playoff[i] <- 0}
+}
+
+
+```
+
+
+```{r}
 
 ```
 
