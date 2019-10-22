@@ -36,7 +36,22 @@ mlb%>%
 
 
 ```{r}
+<<<<<<< HEAD
 playoffs<-mlb%>%filter(game_number > 162)
+=======
+for(i in 1:length(mlb$game_number)){
+  if(mlb$game_number[i] > 162){
+    mlb$playoff[i] <- 1
+  }
+  else{mlb$playoff[i] <- 0}
+}
+
+
+```
+
+
+```{r}
+>>>>>>> 7f376e15e5b23aa3af7de5817eb490950798217c
 
   score1<score2 ~ "team2"))%>%
   mutate(win = case_when(home == winner ~ 1,

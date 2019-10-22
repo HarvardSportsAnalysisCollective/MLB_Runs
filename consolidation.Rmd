@@ -1,0 +1,58 @@
+---
+title: "Consolidation"
+author: "Jack Schroeder"
+date: "10/14/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+
+mlb <- read_csv("mlb_elo.csv") %>% 
+  filter(season>1994) %>% 
+  gather(team1, team2, key = home, value = team) %>% 
+  arrange(season, date) %>% 
+  group_by(season, team) %>% 
+  mutate(game_number = row_number(),
+         game_number_reverse = 163 - game_number,
+         elo_vol = case_when(home == "team1" ~ elo1_post - elo1_pre,
+                             home == "team2" ~ elo2_post - elo2_pre,
+                             TRUE ~ 0),
+         run_diff = case_when(home == "team1" ~ score1 - score2,
+                             home == "team2" ~ score2 - score1,
+                             TRUE ~ 0),
+         win_loss = case_when(home == "team1" & score1 > score2 ~ "W",
+                             home == "team2" & score2 > score1 ~ "W",
+                             TRUE ~ "L"))
+
+playoff <- mlb %>% 
+  filter(!is.na(playoff)) %>% 
+  group_by(season, team) %>%
+  count(season) %>% 
+  select(-n) %>% 
+  unite("seasonteam", season:team, sep = " ")
+
+playoffs <- playoff$seasonteam
+
+mlb <- mlb %>% 
+  mutate(seasonteam = paste(season, team, sep = " ")) %>% 
+  filter(seasonteam %in% playoffs)
+
+game_set <- c(1, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50)
+
+out <- matrix(ncol = 11, nrow = length(playoffs))
+
+for (i in game_set){
+  for (seasonteam in playoffs){
+    out[, i] <- mlb %>% 
+      filter(seasonteam == seasonteam) %>% 
+      select(win_loss)
+  }
+  #game_data <- filter(mlb, game_number_reverse <= i)
+  #out[, i] <- apply(game_data, 2, mean)
+}
+
+
+```
