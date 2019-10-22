@@ -25,34 +25,36 @@ mlb <- read_csv("mlb_elo.csv") %>%
                              TRUE ~ 0),
          win_loss = case_when(home == "team1" & score1 > score2 ~ "W",
                              home == "team2" & score2 > score1 ~ "W",
-                             TRUE ~ "L"))
+                             TRUE ~ "L"),
+           level = case_when(playoff == "c" ~ 0.5,
+                   playoff == "l" ~ 2,
+                   playoff == "d" ~ 1,
+                   playoff == "w" ~ 3,
+                   TRUE ~ 0),
+         seasonteam = paste(season, team, sep = " "))
 
-playoff <- mlb %>% 
-  filter(!is.na(playoff)) %>% 
+playoffs <- mlb %>% 
+  filter(playoff > 0) %>% 
   group_by(season, team) %>%
   count(season) %>% 
   select(-n) %>% 
   unite("seasonteam", season:team, sep = " ")
 
-playoffs <- playoff$seasonteam
+levels <- mlb %>% 
+  filter(playoff > 0) %>% 
+  group_by(season, team) %>% 
+  summarize(max = max(level))
 
 mlb <- mlb %>% 
-  mutate(seasonteam = paste(season, team, sep = " ")) %>% 
-  filter(seasonteam %in% playoffs)
+  filter(seasonteam %in% playoffs$seasonteam)
 
 game_set <- c(1, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50)
 
-out <- matrix(ncol = 11, nrow = length(playoffs))
-
-for (i in game_set){
-  for (seasonteam in playoffs){
-    out[, i] <- mlb %>% 
-      filter(seasonteam == seasonteam) %>% 
-      select(win_loss)
-  }
-  #game_data <- filter(mlb, game_number_reverse <= i)
-  #out[, i] <- apply(game_data, 2, mean)
-}
-
+#for (seasonteam in playoffs){
+#  for i in game_set{
+#    filter(game_number_reverse <= i,
+#           seasonteam = seasonteam)
+#  }
+#}
 
 ```
