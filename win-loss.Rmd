@@ -16,18 +16,45 @@ mlb <- read_csv("mlb_elo.csv")
 
 ```{r}
 mlb%>%
-  arrange(season, date)%>%
+  filter(season >1995,game_number <= 162)%>%
+  mutate(home_score = score1,
+         away_score = score2)%>%
+  select(-score1, -score2)%>%
+  mutate(win = case_when(home_score > away_score & home == "team1"  ~ 1,
+                         home_score < away_score & home == "team1"  ~ 0,
+                         home_score < away_score & home == "team2"  ~ 1,
+                         home_score > away_score & home == "team2"  ~ 0))%>%
   group_by(season, team)%>%
-  mutate(game_number = row_number())
+  mutate(games=n(), win_percentage = (sum(win, na.rm = TRUE)/games))
   
 
-
+  
+  
 
 
 ```
 
 
 ```{r}
+playoffs<-mlb%>%filter(game_number > 162)
 
+  score1<score2 ~ "team2"))%>%
+  mutate(win = case_when(home == winner ~ 1,
+                         home != winner ~ 0))
 ```
+
+```{r}
+mlb%>%
+  filter(season == 1996,game_number <= 162, team == "TEX")%>%
+  mutate(home_score = score1,
+         away_score = score2)%>%
+  select(-score1, -score2)%>%
+  mutate(win = case_when(home_score > away_score & home == "team1"  ~ 1,
+                         home_score < away_score & home == "team1"  ~ 0,
+                         home_score < away_score & home == "team2"  ~ 1,
+                         home_score > away_score & home == "team2"  ~ 0))%>%
+  group_by(season, team)%>%
+  mutate(wins = sum(win, na.rm = TRUE))
+```
+
 
