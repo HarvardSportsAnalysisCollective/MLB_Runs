@@ -1,0 +1,91 @@
+---
+title: "bc"
+author: "BC"
+date: "10/28/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+
+mlb_elo <- read_csv("Documents/GitHub/MLB_Runs/mlb_elo.csv") %>% 
+  filter(season>1994)%>%
+  gather(team1, team2, key = home, value = team) %>% 
+  arrange(season, as.Date(date, "%m/%d/%Y"))%>%
+  group_by(season, team)%>%
+  mutate(game_number = row_number())  
+  
+```
+
+```{r}
+for (i in 1:length(mlb_elo$date)){
+  if (is.na(mlb_elo$playoff[i]) == TRUE){
+    mlb_elo$playoff[i] = 0
+  }
+  else{mlb_elo$playoff[i] = 1}
+}
+```
+
+```{r}
+levels(as.factor(mlb_elo$home))
+```
+
+
+```{r warning=FALSE}
+for(i in 1:length(mlb_elo$team)){
+  if (mlb_elo$home[i] == "team1"){
+    mlb_elo$team_score[i] <- mlb_elo$score1[i]
+    mlb_elo$opp_score[i] <- mlb_elo$score2[i]
+  }
+  else{ 
+    mlb_elo$team_score[i] <- mlb_elo$score2[i]
+    mlb_elo$opp_score[i] <- mlb_elo$score1[i]
+  }
+}
+```
+
+
+```{r}
+for(i in 1:length(mlb_elo$team)){
+  if (mlb_elo$team_score[i] > mlb_elo$opp_score[i]){
+    mlb_elo$win[i] <- 1
+  }
+  else {
+    mlb_elo$win[i] <- 0
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
