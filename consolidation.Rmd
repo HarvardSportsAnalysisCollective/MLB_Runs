@@ -10,8 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 library(tidyverse)
 
-
-mlb <- read_csv("mlb_elo.csv") %>% 
+mlb <- read_csv("mlb_elo_2019final.csv") %>% 
   filter(season>1994) %>% 
   gather(team1, team2, key = home, value = team) %>% 
   arrange(season, as.Date(date, "%m/%d/%Y"))%>%
@@ -445,6 +444,9 @@ summary(lm_test_1)
 
 lm_test_2 <- lm(playoff_wins ~ run_diff.25 + run_diff.162, data=all_all)
 summary(lm_test_2)
+
+lm_test_3 <- lm(playoff_wins ~ win_loss.25 + win_loss.162, data=all_all)
+summary(lm_test_3)
 
 ```
 
