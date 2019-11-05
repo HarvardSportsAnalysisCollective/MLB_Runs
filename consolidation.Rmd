@@ -52,11 +52,7 @@ wins <- mlb %>%
   summarize(playoff_wins = sum(win_loss)) %>% 
   unite("seasonteam", season:team, sep = " ")
 
-mlb_playoff <- mlb %>% 
-  filter(seasonteam %in% playoffs$seasonteam)
-
 mlb$playoff[is.na(mlb$playoff)] <- 0
-mlb_playoff$playoff[is.na(mlb_playoff$playoff)] <- 0
 
 game_set <- c(1, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50)
 ```
@@ -65,142 +61,12 @@ game_set <- c(1, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50)
 
 # Creating game length datasets
 
-r_1 <- mlb_playoff %>% 
-  filter(game_number_reverse <= 1) %>% 
-  group_by(season, team) %>% 
-  summarize(run_diff = sum(run_diff),
-            elo_vol = sum(elo_vol),
-            win_loss = mean(win_loss)) %>% 
-  unite("seasonteam", season:team, sep = " ") %>% 
-  left_join(levels, by = "seasonteam") %>% 
-  left_join(wins, by = "seasonteam")
-
-r_5 <- mlb_playoff %>% 
-  filter(game_number_reverse <= 5) %>% 
-  group_by(season, team) %>% 
-  summarize(run_diff = sum(run_diff),
-            elo_vol = sum(elo_vol),
-            win_loss = mean(win_loss)) %>% 
-  unite("seasonteam", season:team, sep = " ") %>% 
-  left_join(levels, by = "seasonteam") %>% 
-  left_join(wins, by = "seasonteam")
-
-r_10 <- mlb_playoff %>% 
-  filter(game_number_reverse <= 10) %>% 
-  group_by(season, team) %>% 
-  summarize(run_diff = sum(run_diff),
-            elo_vol = sum(elo_vol),
-            win_loss = mean(win_loss)) %>% 
-  unite("seasonteam", season:team, sep = " ") %>% 
-  left_join(levels, by = "seasonteam") %>% 
-  left_join(wins, by = "seasonteam")
-
-r_15 <- mlb_playoff %>% 
-  filter(game_number_reverse <= 15) %>% 
-  group_by(season, team) %>% 
-  summarize(run_diff = sum(run_diff),
-            elo_vol = sum(elo_vol),
-            win_loss = mean(win_loss)) %>% 
-  unite("seasonteam", season:team, sep = " ") %>% 
-  left_join(levels, by = "seasonteam") %>% 
-  left_join(wins, by = "seasonteam")
-
-r_20 <- mlb_playoff %>% 
-  filter(game_number_reverse <= 20) %>% 
-  group_by(season, team) %>% 
-  summarize(run_diff = sum(run_diff),
-            elo_vol = sum(elo_vol),
-            win_loss = mean(win_loss)) %>% 
-  unite("seasonteam", season:team, sep = " ") %>% 
-  left_join(levels, by = "seasonteam") %>% 
-  left_join(wins, by = "seasonteam")
-
-r_25 <- mlb_playoff %>% 
-  filter(game_number_reverse <= 25) %>% 
-  group_by(season, team) %>% 
-  summarize(run_diff = sum(run_diff),
-            elo_vol = sum(elo_vol),
-            win_loss = mean(win_loss)) %>% 
-  unite("seasonteam", season:team, sep = " ") %>% 
-  left_join(levels, by = "seasonteam") %>% 
-  left_join(wins, by = "seasonteam")
-
-r_30 <- mlb_playoff %>% 
-  filter(game_number_reverse <= 30) %>% 
-  group_by(season, team) %>% 
-  summarize(run_diff = sum(run_diff),
-            elo_vol = sum(elo_vol),
-            win_loss = mean(win_loss)) %>% 
-  unite("seasonteam", season:team, sep = " ") %>% 
-  left_join(levels, by = "seasonteam") %>% 
-  left_join(wins, by = "seasonteam")
-
-r_35 <- mlb_playoff %>% 
-  filter(game_number_reverse <= 35) %>% 
-  group_by(season, team) %>% 
-  summarize(run_diff = sum(run_diff),
-            elo_vol = sum(elo_vol),
-            win_loss = mean(win_loss)) %>% 
-  unite("seasonteam", season:team, sep = " ") %>% 
-  left_join(levels, by = "seasonteam") %>% 
-  left_join(wins, by = "seasonteam")
-
-r_40 <- mlb_playoff %>% 
-  filter(game_number_reverse <= 40) %>% 
-  group_by(season, team) %>% 
-  summarize(run_diff = sum(run_diff),
-            elo_vol = sum(elo_vol),
-            win_loss = mean(win_loss)) %>% 
-  unite("seasonteam", season:team, sep = " ") %>% 
-  left_join(levels, by = "seasonteam") %>% 
-  left_join(wins, by = "seasonteam")
-
-r_45 <- mlb_playoff %>% 
-  filter(game_number_reverse <= 45) %>% 
-  group_by(season, team) %>% 
-  summarize(run_diff = sum(run_diff),
-            elo_vol = sum(elo_vol),
-            win_loss = mean(win_loss)) %>% 
-  unite("seasonteam", season:team, sep = " ") %>% 
-  left_join(levels, by = "seasonteam") %>% 
-  left_join(wins, by = "seasonteam")
-
-r_50 <- mlb_playoff %>% 
-  filter(game_number_reverse <= 50) %>% 
-  group_by(season, team) %>% 
-  summarize(run_diff = sum(run_diff),
-            elo_vol = sum(elo_vol),
-            win_loss = mean(win_loss)) %>% 
-  unite("seasonteam", season:team, sep = " ") %>% 
-  left_join(levels, by = "seasonteam") %>% 
-  left_join(wins, by = "seasonteam")
-
-r_81 <- mlb_playoff %>% 
-  filter(game_number_reverse <= 81) %>% 
-  group_by(season, team) %>% 
-  summarize(run_diff = sum(run_diff),
-            elo_vol = sum(elo_vol),
-            win_loss = mean(win_loss)) %>% 
-  unite("seasonteam", season:team, sep = " ") %>% 
-  left_join(levels, by = "seasonteam") %>% 
-  left_join(wins, by = "seasonteam")
-
-r_162 <- mlb_playoff %>% 
-  filter(playoff == 0) %>% 
-  group_by(season, team) %>% 
-  summarize(run_diff = sum(run_diff),
-            elo_vol = sum(elo_vol),
-            win_loss = mean(win_loss)) %>% 
-  unite("seasonteam", season:team, sep = " ") %>% 
-  left_join(levels, by = "seasonteam") %>% 
-  left_join(wins, by = "seasonteam")
-
-levels_all <- mlb %>% 
+levels <- mlb %>% 
   group_by(season, team) %>% 
   summarize(max = max(level)) %>% 
   unite("seasonteam", season:team, sep = " ")
 
-r_1_all <- mlb %>% 
+r_1 <- mlb %>% 
   filter(game_number_reverse <= 1) %>% 
   group_by(season, team) %>% 
   summarize(run_diff = sum(run_diff),
@@ -210,9 +76,9 @@ r_1_all <- mlb %>%
   left_join(levels, by = "seasonteam") %>% 
   left_join(wins, by = "seasonteam")
 
-r_1_all[is.na(r_1_all)] <- 0
+r_1[is.na(r_1)] <- 0
 
-r_5_all <- mlb %>% 
+r_5 <- mlb %>% 
   filter(game_number_reverse <= 5) %>% 
   group_by(season, team) %>% 
   summarize(run_diff = sum(run_diff),
@@ -222,9 +88,9 @@ r_5_all <- mlb %>%
   left_join(levels, by = "seasonteam") %>% 
   left_join(wins, by = "seasonteam")
 
-r_5_all[is.na(r_5_all)] <- 0
+r_5[is.na(r_5)] <- 0
 
-r_10_all <- mlb %>% 
+r_10 <- mlb %>% 
   filter(game_number_reverse <= 10) %>% 
   group_by(season, team) %>% 
   summarize(run_diff = sum(run_diff),
@@ -234,9 +100,9 @@ r_10_all <- mlb %>%
   left_join(levels, by = "seasonteam") %>% 
   left_join(wins, by = "seasonteam")
 
-r_10_all[is.na(r_10_all)] <- 0
+r_10[is.na(r_10)] <- 0
 
-r_15_all <- mlb %>% 
+r_15 <- mlb %>% 
   filter(game_number_reverse <= 15) %>% 
   group_by(season, team) %>% 
   summarize(run_diff = sum(run_diff),
@@ -246,9 +112,9 @@ r_15_all <- mlb %>%
   left_join(levels, by = "seasonteam") %>% 
   left_join(wins, by = "seasonteam")
 
-r_15_all[is.na(r_15_all)] <- 0
+r_15[is.na(r_15)] <- 0
 
-r_20_all <- mlb %>% 
+r_20 <- mlb %>% 
   filter(game_number_reverse <= 20) %>% 
   group_by(season, team) %>% 
   summarize(run_diff = sum(run_diff),
@@ -258,9 +124,9 @@ r_20_all <- mlb %>%
   left_join(levels, by = "seasonteam") %>% 
   left_join(wins, by = "seasonteam")
 
-r_20_all[is.na(r_20_all)] <- 0
+r_20[is.na(r_20)] <- 0
 
-r_25_all <- mlb %>% 
+r_25 <- mlb %>% 
   filter(game_number_reverse <= 25) %>% 
   group_by(season, team) %>% 
   summarize(run_diff = sum(run_diff),
@@ -270,9 +136,9 @@ r_25_all <- mlb %>%
   left_join(levels, by = "seasonteam") %>% 
   left_join(wins, by = "seasonteam")
 
-r_25_all[is.na(r_25_all)] <- 0
+r_25[is.na(r_25)] <- 0
 
-r_30_all <- mlb %>% 
+r_30 <- mlb %>% 
   filter(game_number_reverse <= 30) %>% 
   group_by(season, team) %>% 
   summarize(run_diff = sum(run_diff),
@@ -282,9 +148,9 @@ r_30_all <- mlb %>%
   left_join(levels, by = "seasonteam") %>% 
   left_join(wins, by = "seasonteam")
 
-r_30_all[is.na(r_30_all)] <- 0
+r_30[is.na(r_30)] <- 0
 
-r_35_all <- mlb %>% 
+r_35 <- mlb %>% 
   filter(game_number_reverse <= 35) %>% 
   group_by(season, team) %>% 
   summarize(run_diff = sum(run_diff),
@@ -294,9 +160,9 @@ r_35_all <- mlb %>%
   left_join(levels, by = "seasonteam") %>% 
   left_join(wins, by = "seasonteam")
 
-r_35_all[is.na(r_35_all)] <- 0
+r_35[is.na(r_35)] <- 0
 
-r_40_all <- mlb %>% 
+r_40 <- mlb %>% 
   filter(game_number_reverse <= 40) %>% 
   group_by(season, team) %>% 
   summarize(run_diff = sum(run_diff),
@@ -306,9 +172,9 @@ r_40_all <- mlb %>%
   left_join(levels, by = "seasonteam") %>% 
   left_join(wins, by = "seasonteam")
 
-r_40_all[is.na(r_40_all)] <- 0
+r_40[is.na(r_40)] <- 0
 
-r_45_all <- mlb %>% 
+r_45 <- mlb %>% 
   filter(game_number_reverse <= 45) %>% 
   group_by(season, team) %>% 
   summarize(run_diff = sum(run_diff),
@@ -318,9 +184,9 @@ r_45_all <- mlb %>%
   left_join(levels, by = "seasonteam") %>% 
   left_join(wins, by = "seasonteam")
 
-r_45_all[is.na(r_45_all)] <- 0
+r_45[is.na(r_45)] <- 0
 
-r_50_all <- mlb %>% 
+r_50 <- mlb %>% 
   filter(game_number_reverse <= 50) %>% 
   group_by(season, team) %>% 
   summarize(run_diff = sum(run_diff),
@@ -330,9 +196,69 @@ r_50_all <- mlb %>%
   left_join(levels, by = "seasonteam") %>% 
   left_join(wins, by = "seasonteam")
 
-r_50_all[is.na(r_50_all)] <- 0
+r_50[is.na(r_50)] <- 0
 
-r_81_all <- mlb %>% 
+r_55 <- mlb %>% 
+  filter(game_number_reverse <= 50) %>% 
+  group_by(season, team) %>% 
+  summarize(run_diff = sum(run_diff),
+            elo_vol = sum(elo_vol),
+            win_loss = mean(win_loss)) %>% 
+  unite("seasonteam", season:team, sep = " ") %>% 
+  left_join(levels, by = "seasonteam") %>% 
+  left_join(wins, by = "seasonteam")
+
+r_55[is.na(r_55)] <- 0
+
+r_60 <- mlb %>% 
+  filter(game_number_reverse <= 60) %>% 
+  group_by(season, team) %>% 
+  summarize(run_diff = sum(run_diff),
+            elo_vol = sum(elo_vol),
+            win_loss = mean(win_loss)) %>% 
+  unite("seasonteam", season:team, sep = " ") %>% 
+  left_join(levels, by = "seasonteam") %>% 
+  left_join(wins, by = "seasonteam")
+
+r_60[is.na(r_60)] <- 0
+
+r_65 <- mlb %>% 
+  filter(game_number_reverse <= 65) %>% 
+  group_by(season, team) %>% 
+  summarize(run_diff = sum(run_diff),
+            elo_vol = sum(elo_vol),
+            win_loss = mean(win_loss)) %>% 
+  unite("seasonteam", season:team, sep = " ") %>% 
+  left_join(levels, by = "seasonteam") %>% 
+  left_join(wins, by = "seasonteam")
+
+r_65[is.na(r_65)] <- 0
+
+r_70 <- mlb %>% 
+  filter(game_number_reverse <= 70) %>% 
+  group_by(season, team) %>% 
+  summarize(run_diff = sum(run_diff),
+            elo_vol = sum(elo_vol),
+            win_loss = mean(win_loss)) %>% 
+  unite("seasonteam", season:team, sep = " ") %>% 
+  left_join(levels, by = "seasonteam") %>% 
+  left_join(wins, by = "seasonteam")
+
+r_70[is.na(r_70)] <- 0
+
+r_75 <- mlb %>% 
+  filter(game_number_reverse <= 75) %>% 
+  group_by(season, team) %>% 
+  summarize(run_diff = sum(run_diff),
+            elo_vol = sum(elo_vol),
+            win_loss = mean(win_loss)) %>% 
+  unite("seasonteam", season:team, sep = " ") %>% 
+  left_join(levels, by = "seasonteam") %>% 
+  left_join(wins, by = "seasonteam")
+
+r_75[is.na(r_75)] <- 0
+
+r_81 <- mlb %>% 
   filter(game_number_reverse <= 81) %>% 
   group_by(season, team) %>% 
   summarize(run_diff = sum(run_diff),
@@ -342,9 +268,201 @@ r_81_all <- mlb %>%
   left_join(levels, by = "seasonteam") %>% 
   left_join(wins, by = "seasonteam")
 
-r_81_all[is.na(r_81_all)] <- 0
+r_81[is.na(r_81)] <- 0
 
-r_162_all <- mlb %>% 
+r_85 <- mlb %>% 
+  filter(game_number_reverse <= 85) %>% 
+  group_by(season, team) %>% 
+  summarize(run_diff = sum(run_diff),
+            elo_vol = sum(elo_vol),
+            win_loss = mean(win_loss)) %>% 
+  unite("seasonteam", season:team, sep = " ") %>% 
+  left_join(levels, by = "seasonteam") %>% 
+  left_join(wins, by = "seasonteam")
+
+r_85[is.na(r_85)] <- 0
+
+r_90 <- mlb %>% 
+  filter(game_number_reverse <= 90) %>% 
+  group_by(season, team) %>% 
+  summarize(run_diff = sum(run_diff),
+            elo_vol = sum(elo_vol),
+            win_loss = mean(win_loss)) %>% 
+  unite("seasonteam", season:team, sep = " ") %>% 
+  left_join(levels, by = "seasonteam") %>% 
+  left_join(wins, by = "seasonteam")
+
+r_90[is.na(r_90)] <- 0
+
+r_95 <- mlb %>% 
+  filter(game_number_reverse <= 95) %>% 
+  group_by(season, team) %>% 
+  summarize(run_diff = sum(run_diff),
+            elo_vol = sum(elo_vol),
+            win_loss = mean(win_loss)) %>% 
+  unite("seasonteam", season:team, sep = " ") %>% 
+  left_join(levels, by = "seasonteam") %>% 
+  left_join(wins, by = "seasonteam")
+
+r_95[is.na(r_95)] <- 0
+
+r_100 <- mlb %>% 
+  filter(game_number_reverse <= 100) %>% 
+  group_by(season, team) %>% 
+  summarize(run_diff = sum(run_diff),
+            elo_vol = sum(elo_vol),
+            win_loss = mean(win_loss)) %>% 
+  unite("seasonteam", season:team, sep = " ") %>% 
+  left_join(levels, by = "seasonteam") %>% 
+  left_join(wins, by = "seasonteam")
+
+r_100[is.na(r_100)] <- 0
+
+r_105 <- mlb %>% 
+  filter(game_number_reverse <= 105) %>% 
+  group_by(season, team) %>% 
+  summarize(run_diff = sum(run_diff),
+            elo_vol = sum(elo_vol),
+            win_loss = mean(win_loss)) %>% 
+  unite("seasonteam", season:team, sep = " ") %>% 
+  left_join(levels, by = "seasonteam") %>% 
+  left_join(wins, by = "seasonteam")
+
+r_105[is.na(r_105)] <- 0
+
+r_110 <- mlb %>% 
+  filter(game_number_reverse <= 110) %>% 
+  group_by(season, team) %>% 
+  summarize(run_diff = sum(run_diff),
+            elo_vol = sum(elo_vol),
+            win_loss = mean(win_loss)) %>% 
+  unite("seasonteam", season:team, sep = " ") %>% 
+  left_join(levels, by = "seasonteam") %>% 
+  left_join(wins, by = "seasonteam")
+
+r_110[is.na(r_110)] <- 0
+
+r_115 <- mlb %>% 
+  filter(game_number_reverse <= 115) %>% 
+  group_by(season, team) %>% 
+  summarize(run_diff = sum(run_diff),
+            elo_vol = sum(elo_vol),
+            win_loss = mean(win_loss)) %>% 
+  unite("seasonteam", season:team, sep = " ") %>% 
+  left_join(levels, by = "seasonteam") %>% 
+  left_join(wins, by = "seasonteam")
+
+r_115[is.na(r_115)] <- 0
+
+r_120 <- mlb %>% 
+  filter(game_number_reverse <= 120) %>% 
+  group_by(season, team) %>% 
+  summarize(run_diff = sum(run_diff),
+            elo_vol = sum(elo_vol),
+            win_loss = mean(win_loss)) %>% 
+  unite("seasonteam", season:team, sep = " ") %>% 
+  left_join(levels, by = "seasonteam") %>% 
+  left_join(wins, by = "seasonteam")
+
+r_120[is.na(r_120)] <- 0
+
+r_125 <- mlb %>% 
+  filter(game_number_reverse <= 125) %>% 
+  group_by(season, team) %>% 
+  summarize(run_diff = sum(run_diff),
+            elo_vol = sum(elo_vol),
+            win_loss = mean(win_loss)) %>% 
+  unite("seasonteam", season:team, sep = " ") %>% 
+  left_join(levels, by = "seasonteam") %>% 
+  left_join(wins, by = "seasonteam")
+
+r_125[is.na(r_125)] <- 0
+
+r_130 <- mlb %>% 
+  filter(game_number_reverse <= 130) %>% 
+  group_by(season, team) %>% 
+  summarize(run_diff = sum(run_diff),
+            elo_vol = sum(elo_vol),
+            win_loss = mean(win_loss)) %>% 
+  unite("seasonteam", season:team, sep = " ") %>% 
+  left_join(levels, by = "seasonteam") %>% 
+  left_join(wins, by = "seasonteam")
+
+r_130[is.na(r_130)] <- 0
+
+r_135 <- mlb %>% 
+  filter(game_number_reverse <= 135) %>% 
+  group_by(season, team) %>% 
+  summarize(run_diff = sum(run_diff),
+            elo_vol = sum(elo_vol),
+            win_loss = mean(win_loss)) %>% 
+  unite("seasonteam", season:team, sep = " ") %>% 
+  left_join(levels, by = "seasonteam") %>% 
+  left_join(wins, by = "seasonteam")
+
+r_135[is.na(r_135)] <- 0
+
+r_140 <- mlb %>% 
+  filter(game_number_reverse <= 140) %>% 
+  group_by(season, team) %>% 
+  summarize(run_diff = sum(run_diff),
+            elo_vol = sum(elo_vol),
+            win_loss = mean(win_loss)) %>% 
+  unite("seasonteam", season:team, sep = " ") %>% 
+  left_join(levels, by = "seasonteam") %>% 
+  left_join(wins, by = "seasonteam")
+
+r_140[is.na(r_140)] <- 0
+
+r_145 <- mlb %>% 
+  filter(game_number_reverse <= 145) %>% 
+  group_by(season, team) %>% 
+  summarize(run_diff = sum(run_diff),
+            elo_vol = sum(elo_vol),
+            win_loss = mean(win_loss)) %>% 
+  unite("seasonteam", season:team, sep = " ") %>% 
+  left_join(levels, by = "seasonteam") %>% 
+  left_join(wins, by = "seasonteam")
+
+r_145[is.na(r_145)] <- 0
+
+r_150 <- mlb %>% 
+  filter(game_number_reverse <= 150) %>% 
+  group_by(season, team) %>% 
+  summarize(run_diff = sum(run_diff),
+            elo_vol = sum(elo_vol),
+            win_loss = mean(win_loss)) %>% 
+  unite("seasonteam", season:team, sep = " ") %>% 
+  left_join(levels, by = "seasonteam") %>% 
+  left_join(wins, by = "seasonteam")
+
+r_150[is.na(r_150)] <- 0
+
+r_155 <- mlb %>% 
+  filter(game_number_reverse <= 155) %>% 
+  group_by(season, team) %>% 
+  summarize(run_diff = sum(run_diff),
+            elo_vol = sum(elo_vol),
+            win_loss = mean(win_loss)) %>% 
+  unite("seasonteam", season:team, sep = " ") %>% 
+  left_join(levels, by = "seasonteam") %>% 
+  left_join(wins, by = "seasonteam")
+
+r_155[is.na(r_155)] <- 0
+
+r_160 <- mlb %>% 
+  filter(game_number_reverse <= 160) %>% 
+  group_by(season, team) %>% 
+  summarize(run_diff = sum(run_diff),
+            elo_vol = sum(elo_vol),
+            win_loss = mean(win_loss)) %>% 
+  unite("seasonteam", season:team, sep = " ") %>% 
+  left_join(levels, by = "seasonteam") %>% 
+  left_join(wins, by = "seasonteam")
+
+r_160[is.na(r_160)] <- 0
+
+r_162 <- mlb %>% 
   filter(playoff == 0) %>% 
   group_by(season, team) %>% 
   summarize(run_diff = sum(run_diff),
@@ -354,11 +472,15 @@ r_162_all <- mlb %>%
   left_join(levels, by = "seasonteam") %>% 
   left_join(wins, by = "seasonteam")
 
-r_162_all[is.na(r_162_all)] <- 0
+r_162[is.na(r_162)] <- 0
 
 ```
 
 ```{r, include=FALSE}
+#Sanity check - what if playoff teams is survivor bias?
+
+
+
 ## Regressing all of each factor to determine optimal game length
 
 all <- left_join(r_1, r_5, by = "seasonteam", suffix = c(".01", ".05")) %>% 
@@ -371,81 +493,62 @@ all <- left_join(r_1, r_5, by = "seasonteam", suffix = c(".01", ".05")) %>%
   left_join(., r_40, by = "seasonteam", suffix = c("", ".40")) %>% 
   left_join(., r_45, by = "seasonteam", suffix = c("", ".45")) %>% 
   left_join(., r_50, by = "seasonteam", suffix = c("", ".50")) %>% 
+  left_join(., r_55, by = "seasonteam", suffix = c("", ".55")) %>%
+  left_join(., r_60, by = "seasonteam", suffix = c("", ".60")) %>%
+  left_join(., r_65, by = "seasonteam", suffix = c("", ".65")) %>%
+  left_join(., r_70, by = "seasonteam", suffix = c("", ".70")) %>%
+  left_join(., r_75, by = "seasonteam", suffix = c("", ".75")) %>%
   left_join(., r_81, by = "seasonteam", suffix = c("", ".81")) %>% 
+  left_join(., r_85, by = "seasonteam", suffix = c("", ".85")) %>%
+  left_join(., r_90, by = "seasonteam", suffix = c("", ".90")) %>%
+  left_join(., r_95, by = "seasonteam", suffix = c("", ".95")) %>%
+  left_join(., r_100, by = "seasonteam", suffix = c("", ".100")) %>%
+  left_join(., r_105, by = "seasonteam", suffix = c("", ".105")) %>%
+  left_join(., r_110, by = "seasonteam", suffix = c("", ".110")) %>%
+  left_join(., r_115, by = "seasonteam", suffix = c("", ".115")) %>%
+  left_join(., r_120, by = "seasonteam", suffix = c("", ".120")) %>%
+  left_join(., r_125, by = "seasonteam", suffix = c("", ".125")) %>%
+  left_join(., r_130, by = "seasonteam", suffix = c("", ".130")) %>%
+  left_join(., r_135, by = "seasonteam", suffix = c("", ".135")) %>%
+  left_join(., r_140, by = "seasonteam", suffix = c("", ".140")) %>%
+  left_join(., r_145, by = "seasonteam", suffix = c("", ".145")) %>%
+  left_join(., r_150, by = "seasonteam", suffix = c("", ".150")) %>%
+  left_join(., r_155, by = "seasonteam", suffix = c("", ".155")) %>%
   left_join(., r_162, by = "seasonteam", suffix = c("", ".162")) %>% 
-  select(-c(max.01, max.05, max.15, max.20, max.25, max.30, max.35, max.40, max.45, max.50, max.81, max.162)) %>% 
-  select(-c(playoff_wins.01, playoff_wins.05, playoff_wins.15, playoff_wins.20, playoff_wins.25, playoff_wins.30, playoff_wins.35, playoff_wins.40, playoff_wins.45, playoff_wins.50, playoff_wins.81, playoff_wins.162)) %>% 
+  select(-c(max.01, max.05, max.15, max.20, max.25, max.30, max.35, max.40, max.45, max.50, max.55, max.60, max.65, max.70, max.75, max.81, max.85, max.90, max.95, max.100, max.105, max.110, max.115, max.120, max.125, max.130, max.135, max.140, max.145, max.150, max.155, max.162)) %>% 
+  select(-c(playoff_wins.01, playoff_wins.05, playoff_wins.15, playoff_wins.20, playoff_wins.25, playoff_wins.30, playoff_wins.35, playoff_wins.40, playoff_wins.45, playoff_wins.50, playoff_wins.55, playoff_wins.60, playoff_wins.65, playoff_wins.70, playoff_wins.75, playoff_wins.81, playoff_wins.85, playoff_wins.90, playoff_wins.95, playoff_wins.100, playoff_wins.105, playoff_wins.110, playoff_wins.115, playoff_wins.120, playoff_wins.125, playoff_wins.130, playoff_wins.135, playoff_wins.140, playoff_wins.145, playoff_wins.150, playoff_wins.155, playoff_wins.162)) %>% 
   rename(run_diff.10 = run_diff,
          elo_vol.10 = elo_vol,
          win_loss.10 = win_loss)
 
-lm_run_diff <- lm(playoff_wins ~ run_diff.01 + run_diff.05 + run_diff.10 + run_diff.15 + run_diff.20 + run_diff.25 + run_diff.30 + run_diff.35 + run_diff.40 + run_diff.45 + run_diff.50 + run_diff.81 + run_diff.162, data=all)
+all[is.na(all)] <- 0
+
+lm_run_diff <- lm(playoff_wins ~ run_diff.01+ run_diff.05+ run_diff.15+ run_diff.20+ run_diff.25+ run_diff.30+ run_diff.35+ run_diff.40+ run_diff.45+ run_diff.50+ run_diff.55+ run_diff.60+ run_diff.65+ run_diff.70+ run_diff.75+ run_diff.81+ run_diff.85+ run_diff.90+ run_diff.95+ run_diff.100+ run_diff.105+ run_diff.110+ run_diff.115+ run_diff.120+ run_diff.125+ run_diff.130+ run_diff.135+ run_diff.140+ run_diff.145+ run_diff.150+ run_diff.155+ run_diff.162, data=all)
 summary(lm_run_diff)
 summary(step(lm_run_diff))
 
-lm_elo_vol <- lm(playoff_wins ~ elo_vol.01 + elo_vol.05 + elo_vol.10 + elo_vol.15 + elo_vol.20 + elo_vol.25 + elo_vol.30 + elo_vol.35 + elo_vol.40 + elo_vol.45 + elo_vol.50 + elo_vol.81 + elo_vol.162, data=all)
+lm_elo_vol <- lm(playoff_wins ~ elo_vol.01+ elo_vol.05+ elo_vol.15+ elo_vol.20+ elo_vol.25+ elo_vol.30+ elo_vol.35+ elo_vol.40+ elo_vol.45+ elo_vol.50+ elo_vol.55+ elo_vol.60+ elo_vol.65+ elo_vol.70+ elo_vol.75+ elo_vol.81+ elo_vol.85+ elo_vol.90+ elo_vol.95+ elo_vol.100+ elo_vol.105+ elo_vol.110+ elo_vol.115+ elo_vol.120+ elo_vol.125+ elo_vol.130+ elo_vol.135+ elo_vol.140+ elo_vol.145+ elo_vol.150+ elo_vol.155+ elo_vol.162, data=all)
 summary(lm_elo_vol)
 summary(step(lm_elo_vol))
 
-lm_win_loss <- lm(playoff_wins ~ win_loss.01 + win_loss.05 + win_loss.10 + win_loss.15 + win_loss.20 + win_loss.25 + win_loss.30 + win_loss.35 + win_loss.40 + win_loss.45 + win_loss.50 + win_loss.81 + win_loss.162, data=all)
+lm_win_loss <- lm(playoff_wins ~ win_loss.01+ win_loss.05+ win_loss.15+ win_loss.20+ win_loss.25+ win_loss.30+ win_loss.35+ win_loss.40+ win_loss.45+ win_loss.50+ win_loss.55+ win_loss.60+ win_loss.65+ win_loss.70+ win_loss.75+ win_loss.81+ win_loss.85+ win_loss.90+ win_loss.95+ win_loss.100+ win_loss.105+ win_loss.110+ win_loss.115+ win_loss.120+ win_loss.125+ win_loss.130+ win_loss.135+ win_loss.140+ win_loss.145+ win_loss.150+ win_loss.155+ win_loss.162, data=all)
 summary(lm_win_loss)
 summary(step(lm_win_loss))
 
-```
-
-```{r, include=FALSE}
-#Sanity check - what if playoff teams is survivor bias?
-
-
-
-## Regressing all of each factor to determine optimal game length
-
-all_all <- left_join(r_1_all, r_5_all, by = "seasonteam", suffix = c(".01", ".05")) %>% 
-  left_join(., r_10_all, by = "seasonteam", suffix = c("", ".10")) %>% 
-  left_join(., r_15_all, by = "seasonteam", suffix = c("", ".15")) %>% 
-  left_join(., r_20_all, by = "seasonteam", suffix = c("", ".20")) %>% 
-  left_join(., r_25_all, by = "seasonteam", suffix = c("", ".25")) %>% 
-  left_join(., r_30_all, by = "seasonteam", suffix = c("", ".30")) %>% 
-  left_join(., r_35_all, by = "seasonteam", suffix = c("", ".35")) %>% 
-  left_join(., r_40_all, by = "seasonteam", suffix = c("", ".40")) %>% 
-  left_join(., r_45_all, by = "seasonteam", suffix = c("", ".45")) %>% 
-  left_join(., r_50_all, by = "seasonteam", suffix = c("", ".50")) %>% 
-  left_join(., r_81_all, by = "seasonteam", suffix = c("", ".81")) %>% 
-  left_join(., r_162_all, by = "seasonteam", suffix = c("", ".162")) %>% 
-  select(-c(max.01, max.05, max.15, max.20, max.25, max.30, max.35, max.40, max.45, max.50, max.81, max.162)) %>% 
-  select(-c(playoff_wins.01, playoff_wins.05, playoff_wins.15, playoff_wins.20, playoff_wins.25, playoff_wins.30, playoff_wins.35, playoff_wins.40, playoff_wins.45, playoff_wins.50, playoff_wins.81, playoff_wins.162)) %>% 
-  rename(run_diff.10 = run_diff,
-         elo_vol.10 = elo_vol,
-         win_loss.10 = win_loss)
-
-all_all[is.na(all_all)] <- 0
-
-lm_run_diff_all <- lm(playoff_wins ~ run_diff.01 + run_diff.05 + run_diff.10 + run_diff.15 + run_diff.20 + run_diff.25 + run_diff.30 + run_diff.35 + run_diff.40 + run_diff.45 + run_diff.50 + run_diff.81 + run_diff.162, data=all_all)
-summary(lm_run_diff_all)
-summary(step(lm_run_diff_all))
-
-lm_elo_vol_all <- lm(playoff_wins ~ elo_vol.01 + elo_vol.05 + elo_vol.10 + elo_vol.15 + elo_vol.20 + elo_vol.25 + elo_vol.30 + elo_vol.35 + elo_vol.40 + elo_vol.45 + elo_vol.50 + elo_vol.81 + elo_vol.162, data=all_all)
-summary(lm_elo_vol_all)
-summary(step(lm_elo_vol_all))
-
-lm_win_loss_all <- lm(playoff_wins ~ win_loss.01 + win_loss.05 + win_loss.10 + win_loss.15 + win_loss.20 + win_loss.25 + win_loss.30 + win_loss.35 + win_loss.40 + win_loss.45 + win_loss.50 + win_loss.81 + win_loss.162, data=all_all)
-summary(lm_win_loss_all)
-summary(step(lm_win_loss_all))
-
-lm_all_all <- lm(data=all_all, playoff_wins ~ win_loss.01 + win_loss.05 + win_loss.10 + win_loss.15 + win_loss.20 + win_loss.25 + win_loss.30 + win_loss.35 + win_loss.40 + win_loss.45 + win_loss.50 + win_loss.81 + win_loss.162 + elo_vol.01 + elo_vol.05 + elo_vol.10 + elo_vol.15 + elo_vol.20 + elo_vol.25 + elo_vol.30 + elo_vol.35 + elo_vol.40 + elo_vol.45 + elo_vol.50 + elo_vol.81 + elo_vol.162 + run_diff.01 + run_diff.05 + run_diff.10 + run_diff.15 + run_diff.20 + run_diff.25 + run_diff.30 + run_diff.35 + run_diff.40 + run_diff.45 + run_diff.50 + run_diff.81 + run_diff.162)
-summary(lm_all_all)
-summary(step(lm_all_all))
+lm <- lm(data=all, playoff_wins ~ win_loss.01+ win_loss.05+ win_loss.15+ win_loss.20+ win_loss.25+ win_loss.30+ win_loss.35+ win_loss.40+ win_loss.45+ win_loss.50+ win_loss.55+ win_loss.60+ win_loss.65+ win_loss.70+ win_loss.75+ win_loss.81+ win_loss.85+ win_loss.90+ win_loss.95+ win_loss.100+ win_loss.105+ win_loss.110+ win_loss.115+ win_loss.120+ win_loss.125+ win_loss.130+ win_loss.135+ win_loss.140+ win_loss.145+ win_loss.150+ win_loss.155+ win_loss.162 + elo_vol.01+ elo_vol.05+ elo_vol.15+ elo_vol.20+ elo_vol.25+ elo_vol.30+ elo_vol.35+ elo_vol.40+ elo_vol.45+ elo_vol.50+ elo_vol.55+ elo_vol.60+ elo_vol.65+ elo_vol.70+ elo_vol.75+ elo_vol.81+ elo_vol.85+ elo_vol.90+ elo_vol.95+ elo_vol.100+ elo_vol.105+ elo_vol.110+ elo_vol.115+ elo_vol.120+ elo_vol.125+ elo_vol.130+ elo_vol.135+ elo_vol.140+ elo_vol.145+ elo_vol.150+ elo_vol.155+ elo_vol.162 + run_diff.01+ run_diff.05+ run_diff.15+ run_diff.20+ run_diff.25+ run_diff.30+ run_diff.35+ run_diff.40+ run_diff.45+ run_diff.50+ run_diff.55+ run_diff.60+ run_diff.65+ run_diff.70+ run_diff.75+ run_diff.81+ run_diff.85+ run_diff.90+ run_diff.95+ run_diff.100+ run_diff.105+ run_diff.110+ run_diff.115+ run_diff.120+ run_diff.125+ run_diff.130+ run_diff.135+ run_diff.140+ run_diff.145+ run_diff.150+ run_diff.155+ run_diff.162,)
+summary(lm)
+summary(step(lm))
   
-lm_run_diff_all_25 <- lm(playoff_wins ~ run_diff.25 + run_diff.162, data=all_all)
-summary(lm_run_diff_all_25)
+lm_run_diff_25 <- lm(playoff_wins ~ run_diff.25 + run_diff.162, data=all)
+summary(lm_run_diff_25)
 
-lm_test_1 <- lm(playoff_wins ~ elo_vol.25 + elo_vol.162, data=all_all)
+lm_test_1 <- lm(playoff_wins ~ elo_vol.25 + elo_vol.162, data=all)
 summary(lm_test_1)
 
-lm_test_2 <- lm(playoff_wins ~ run_diff.25 + run_diff.162, data=all_all)
+lm_test_2 <- lm(playoff_wins ~ run_diff.25 + run_diff.162, data=all)
 summary(lm_test_2)
 
-lm_test_3 <- lm(playoff_wins ~ win_loss.25 + win_loss.162, data=all_all)
+lm_test_3 <- lm(playoff_wins ~ win_loss.25 + win_loss.162, data=all)
 summary(lm_test_3)
 
 ```
@@ -504,57 +607,5 @@ summary(step(lm_81))
 lm_162 <- lm(playoff_wins ~ run_diff + elo_vol + win_loss, data=r_162)
 summary(lm_162)
 summary(step(lm_162))
-
-lm_1_all <- lm(playoff_wins ~ run_diff + elo_vol + win_loss, data=r_1_all)
-summary(lm_1_all)
-summary(step(lm_1_all))
-
-lm_5_all <- lm(playoff_wins ~ run_diff + elo_vol + win_loss, data=r_5_all)
-summary(lm_5_all)
-summary(step(lm_5_all))
-
-lm_10_all <- lm(playoff_wins ~ run_diff + elo_vol + win_loss, data=r_10_all)
-summary(lm_10_all)
-summary(step(lm_10_all))
-
-lm_15_all <- lm(playoff_wins ~ run_diff + elo_vol + win_loss, data=r_15_all)
-summary(lm_15_all)
-summary(step(lm_15_all))
-
-lm_20_all <- lm(playoff_wins ~ run_diff + elo_vol + win_loss, data=r_20_all)
-summary(lm_20_all)
-summary(step(lm_20_all))
-
-lm_25_all <- lm(playoff_wins ~ run_diff + elo_vol + win_loss, data=r_25_all)
-summary(lm_25_all)
-summary(step(lm_25_all))
-
-lm_30_all <- lm(playoff_wins ~ run_diff + elo_vol + win_loss, data=r_30_all)
-summary(lm_30_all)
-summary(step(lm_30_all))
-
-lm_35_all <- lm(playoff_wins ~ run_diff + elo_vol + win_loss, data=r_35_all)
-summary(lm_35_all)
-summary(step(lm_35_all))
-
-lm_40_all <- lm(playoff_wins ~ run_diff + elo_vol + win_loss, data=r_40_all)
-summary(lm_40_all)
-summary(step(lm_40_all))
-
-lm_45_all <- lm(playoff_wins ~ run_diff + elo_vol + win_loss, data=r_45_all)
-summary(lm_45_all)
-summary(step(lm_45_all))
-
-lm_50_all <- lm(playoff_wins ~ run_diff + elo_vol + win_loss, data=r_50_all)
-summary(lm_50_all)
-summary(step(lm_50_all))
-
-lm_81_all <- lm(playoff_wins ~ run_diff + elo_vol + win_loss, data=r_81_all)
-summary(lm_81_all)
-summary(step(lm_81_all))
-
-lm_162_all <- lm(playoff_wins ~ run_diff + elo_vol + win_loss, data=r_162_all)
-summary(lm_162_all)
-summary(step(lm_162_all))
 ```
 
