@@ -614,6 +614,7 @@ summary(step(lm_162))
 ```
 
 ```{r}
+<<<<<<< HEAD
 graphs <- all %>% 
   mutate(playoff_binary = case_when(playoff_wins > 0 ~ 1,
                                     TRUE ~ 0))
@@ -653,5 +654,97 @@ ggplot(graphs, aes(x=run_diff.162, y=run_diff.50, color=playoff_binary)) +
        #subtitle = "Blue dots represent playoff teams", 
        caption = "Blue dots represent playoff teams.\nHarvard Sports Analysis Collective") +
   ggsave("rundiff50.png")
+=======
+lm_w_1 <- lm(playoff_wins ~ win_loss, data=r_1)
+summary(lm_w_1)
+
+lm_w_5 <- lm(playoff_wins ~ win_loss, data=r_5)
+summary(lm_w_5)
+
+
+lm_w_10 <- lm(playoff_wins ~ win_loss, data=r_10)
+summary(lm_w_10)
+
+
+lm_w_15 <- lm(playoff_wins ~ win_loss, data=r_15)
+summary(lm_w_15)
+
+lm_w_20 <- lm(playoff_wins ~  win_loss, data=r_20)
+summary(lm_w_20)
+
+
+lm_w_25 <- lm(playoff_wins ~  win_loss, data=r_25)
+summary(lm_w_25)
+
+lm_w_30 <- lm(playoff_wins ~  win_loss, data=r_30)
+summary(lm_w_30)
+
+
+lm_w_35 <- lm(playoff_wins ~  win_loss, data=r_35)
+summary(lm_w_35)
+
+lm_w_40 <- lm(playoff_wins ~  win_loss, data=r_40)
+summary(lm_w_40)
+
+
+lm_w_45 <- lm(playoff_wins ~ win_loss, data=r_45)
+summary(lm_w_45)
+
+
+lm_w_50 <- lm(playoff_wins ~  win_loss, data=r_50)
+summary(lm_w_50)
+
+
+lm_w_81 <- lm(playoff_wins ~ win_loss, data=r_81)
+summary(lm_w_81)
+
+
+lm_w_162 <- lm(playoff_wins ~ win_loss, data=r_162)
+summary(lm_w_162)
+
+```
+```{r}
+plot(playoff_wins ~ win_loss, data = r_1)
+abline(lm_w_1)
+
+plot(playoff_wins ~ win_loss, data = r_5)
+abline(lm_w_5)
+
+plot(playoff_wins ~ win_loss, data = r_10)
+abline(lm_w_10)
+```
+
+```{r}
+
+
+plot(playoff_wins ~ win_loss, data = r_30)
+abline(lm_w_30)
+
+
+```
+```{r}
+ggplot(aes(x = win_loss, y = playoff_wins), data = r_30)+geom_point()+geom_abline()+scale_y_continuous(breaks = seq(0,14, 2))+labs(x = "Win Percentage", y = "Playoff Wins", title = expression("Best R'^'2 Out of all teams"))
+```
+
+```{r}
+ggplotRegression <- function (fit) {
+
+require(ggplot2)
+
+ggplot(fit$model, aes_string(x = names(fit$model)[2], y = names(fit$model)[1])) + 
+  geom_point() +
+  stat_smooth(method = "lm", col = "red") +
+  labs(subtitle  = paste("Adj R2 = ",signif(summary(fit)$adj.r.squared, 5),
+                     "Intercept =",signif(fit$coef[[1]],5 ),
+                     " Slope =",signif(fit$coef[[2]], 5),
+                     " P =",signif(summary(fit)$coef[2,4], 5)))
+}
+
+
+ggplotRegression(lm(playoff_wins ~ win_loss, data = r_30))+labs(title = expression("Win-Loss in Last 30 Games vs. Playoff Success"), subtitle  = paste("Adj R2 = ",signif(summary(fit)$adj.r.squared, 5),
+                     "Intercept =",signif(fit$coef[[1]],5 ),
+                     " Slope =",signif(fit$coef[[2]], 5),
+                     " P =",signif(summary(fit)$coef[2,4], 5)))
+>>>>>>> 25388ed7e18cba9108c8eb25e6de4434a6842e39
 ```
 
