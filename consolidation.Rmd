@@ -527,6 +527,9 @@ lm_run_diff <- lm(playoff_wins ~ run_diff.01+ run_diff.05+ run_diff.15+ run_diff
 summary(lm_run_diff)
 summary(step(lm_run_diff))
 
+summary(lm(playoff_wins ~ run_diff.15 + run_diff.81 + run_diff.162, data=all))
+
+
 lm_elo_vol <- lm(playoff_wins ~ elo_vol.01+ elo_vol.05+ elo_vol.15+ elo_vol.20+ elo_vol.25+ elo_vol.30+ elo_vol.35+ elo_vol.40+ elo_vol.45+ elo_vol.50+ elo_vol.55+ elo_vol.60+ elo_vol.65+ elo_vol.70+ elo_vol.75+ elo_vol.81+ elo_vol.85+ elo_vol.90+ elo_vol.95+ elo_vol.100+ elo_vol.105+ elo_vol.110+ elo_vol.115+ elo_vol.120+ elo_vol.125+ elo_vol.130+ elo_vol.135+ elo_vol.140+ elo_vol.145+ elo_vol.150+ elo_vol.155+ elo_vol.162, data=all)
 summary(lm_elo_vol)
 summary(step(lm_elo_vol))
@@ -535,21 +538,22 @@ lm_win_loss <- lm(playoff_wins ~ win_loss.01+ win_loss.05+ win_loss.15+ win_loss
 summary(lm_win_loss)
 summary(step(lm_win_loss))
 
-lm <- lm(data=all, playoff_wins ~ win_loss.01+ win_loss.05+ win_loss.15+ win_loss.20+ win_loss.25+ win_loss.30+ win_loss.35+ win_loss.40+ win_loss.45+ win_loss.50+ win_loss.55+ win_loss.60+ win_loss.65+ win_loss.70+ win_loss.75+ win_loss.81+ win_loss.85+ win_loss.90+ win_loss.95+ win_loss.100+ win_loss.105+ win_loss.110+ win_loss.115+ win_loss.120+ win_loss.125+ win_loss.130+ win_loss.135+ win_loss.140+ win_loss.145+ win_loss.150+ win_loss.155+ win_loss.162 + elo_vol.01+ elo_vol.05+ elo_vol.15+ elo_vol.20+ elo_vol.25+ elo_vol.30+ elo_vol.35+ elo_vol.40+ elo_vol.45+ elo_vol.50+ elo_vol.55+ elo_vol.60+ elo_vol.65+ elo_vol.70+ elo_vol.75+ elo_vol.81+ elo_vol.85+ elo_vol.90+ elo_vol.95+ elo_vol.100+ elo_vol.105+ elo_vol.110+ elo_vol.115+ elo_vol.120+ elo_vol.125+ elo_vol.130+ elo_vol.135+ elo_vol.140+ elo_vol.145+ elo_vol.150+ elo_vol.155+ elo_vol.162 + run_diff.01+ run_diff.05+ run_diff.15+ run_diff.20+ run_diff.25+ run_diff.30+ run_diff.35+ run_diff.40+ run_diff.45+ run_diff.50+ run_diff.55+ run_diff.60+ run_diff.65+ run_diff.70+ run_diff.75+ run_diff.81+ run_diff.85+ run_diff.90+ run_diff.95+ run_diff.100+ run_diff.105+ run_diff.110+ run_diff.115+ run_diff.120+ run_diff.125+ run_diff.130+ run_diff.135+ run_diff.140+ run_diff.145+ run_diff.150+ run_diff.155+ run_diff.162,)
+lm <- lm(data=all, playoff_wins ~ win_loss.01+ win_loss.05+ win_loss.15+ win_loss.20+ win_loss.25+ win_loss.30+ win_loss.35+ win_loss.40+ win_loss.45+ win_loss.50+ win_loss.55+ win_loss.60+ win_loss.65+ win_loss.70+ win_loss.75+ win_loss.81+ win_loss.85+ win_loss.90+ win_loss.95+ win_loss.100+ win_loss.105+ win_loss.110+ win_loss.115+ win_loss.120+ win_loss.125+ win_loss.130+ win_loss.135+ win_loss.140+ win_loss.145+ win_loss.150+ win_loss.155+ win_loss.162 + elo_vol.01+ elo_vol.05+ elo_vol.15+ elo_vol.20+ elo_vol.25+ elo_vol.30+ elo_vol.35+ elo_vol.40+ elo_vol.45+ elo_vol.50+ elo_vol.55+ elo_vol.60+ elo_vol.65+ elo_vol.70+ elo_vol.75+ elo_vol.81+ elo_vol.85+ elo_vol.90+ elo_vol.95+ elo_vol.100+ elo_vol.105+ elo_vol.110+ elo_vol.115+ elo_vol.120+ elo_vol.125+ elo_vol.130+ elo_vol.135+ elo_vol.140+ elo_vol.145+ elo_vol.150+ elo_vol.155+ elo_vol.162 + run_diff.01+ run_diff.05+ run_diff.15+ run_diff.20+ run_diff.25+ run_diff.30+ run_diff.35+ run_diff.40+ run_diff.45+ run_diff.50+ run_diff.55+ run_diff.60+ run_diff.65+ run_diff.70+ run_diff.75+ run_diff.81+ run_diff.85+ run_diff.90+ run_diff.95+ run_diff.100+ run_diff.105+ run_diff.110+ run_diff.115+ run_diff.120+ run_diff.125+ run_diff.130+ run_diff.135+ run_diff.140+ run_diff.145+ run_diff.150+ run_diff.155+ run_diff.162)
 summary(lm)
 summary(step(lm))
   
 lm_run_diff_25 <- lm(playoff_wins ~ run_diff.25 + run_diff.162, data=all)
 summary(lm_run_diff_25)
 
-lm_test_1 <- lm(playoff_wins ~ elo_vol.25 + elo_vol.162, data=all)
+lm_test_1 <- lm(playoff_wins ~ elo_vol.15 + +elo_vol.81+elo_vol.162, data=all)
 summary(lm_test_1)
 
-lm_test_2 <- lm(playoff_wins ~ run_diff.25 + run_diff.162, data=all)
+lm_test_2 <- lm(playoff_wins ~ run_diff.10 + run_diff.81 + run_diff.162, data=all)
 summary(lm_test_2)
 
-lm_test_3 <- lm(playoff_wins ~ win_loss.25 + win_loss.162, data=all)
+lm_test_3 <- lm(playoff_wins ~ win_loss.15 +win_loss.81+win_loss.162, data=all)
 summary(lm_test_3)
+summary(step(lm_test_3))
 
 ```
 
@@ -607,5 +611,47 @@ summary(step(lm_81))
 lm_162 <- lm(playoff_wins ~ run_diff + elo_vol + win_loss, data=r_162)
 summary(lm_162)
 summary(step(lm_162))
+```
+
+```{r}
+graphs <- all %>% 
+  mutate(playoff_binary = case_when(playoff_wins > 0 ~ 1,
+                                    TRUE ~ 0))
+
+ggplot(graphs, aes(x=run_diff.162, y=win_loss.162, color=playoff_binary)) + 
+  geom_point() + 
+  theme(legend.position = "none") +
+  xlab("Run Differential (Season)") +
+  ylab("Win Percentage (Season)") +
+  labs(title = "Distribution of Run Differential", subtitle = "Blue dots represent playoff teams", caption = "Harvard Sports Analysis Collective")
+
+ggplot(graphs, aes(x=run_diff.162, y=elo_vol.162, color=playoff_binary)) + 
+  geom_point() + 
+  theme(legend.position = "none") +
+  xlab("Run Differential (Season)") +
+  ylab("Elo Volatility (Season)") +
+  labs(title = "Elo Volatility and Run Differential", 
+       #subtitle = "Blue dots represent playoff teams", 
+       caption = "Blue dots represent playoff teams.\nHarvard Sports Analysis Collective")
+
+ggplot(graphs, aes(x=run_diff.162, y=run_diff.05, color=playoff_binary)) + 
+  geom_point() + 
+  theme(legend.position = "none") +
+  xlab("Run Differential (Season)") +
+  ylab("Run Differential (Last 5 Games)") +
+  labs(title = "Early comparisons are very noisy...", 
+       #subtitle = "Blue dots represent playoff teams", 
+       caption = "Blue dots represent playoff teams.\nHarvard Sports Analysis Collective") +
+  ggsave("rundiff05.png")
+
+ggplot(graphs, aes(x=run_diff.162, y=run_diff.50, color=playoff_binary)) + 
+  geom_point() + 
+  theme(legend.position = "none") +
+  xlab("Run Differential (Season)") +
+  ylab("Run Differential (Last 50 Games)") +
+  labs(title = "...but larger intervals are much more correlated", 
+       #subtitle = "Blue dots represent playoff teams", 
+       caption = "Blue dots represent playoff teams.\nHarvard Sports Analysis Collective") +
+  ggsave("rundiff50.png")
 ```
 
